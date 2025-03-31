@@ -23,9 +23,7 @@
             android:layout_margin="12dp"
             android:fontFamily="sans-serif-black"
             android:text="Recent movies"
-            android:textAlignment="center"
-            android:textAppearance="@style/MaterialAlertDialog.Material3.Title.Icon.CenterStacked"
-            app:autoSizeMaxTextSize="18sp" />
+            android:textAlignment="center"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recicler"

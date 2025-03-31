@@ -1,43 +1,61 @@
 package com.gomez.herlin.my_application
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.TextView
-import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
+import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.GridLayoutManager
 import com.gomez.herlin.my_application.databinding.ActivityMainBinding
+import com.gomez.herlin.my_application.model.Movie
+import com.gomez.herlin.my_application.model.MovieDbClients
+import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val binding = ActivityMainBinding.inflate(layoutInflater)
         enableEdgeToEdge()
-        //setContentView(R.layout.activity_main)
         setContentView(binding.root)
+
+        val moviesAdapter = MoviesAdapter(emptyList()) { movie ->
+            navigateTo(movie)
+        }
+
+        /*val moviesAdapter = MoviesAdapter(emptyList(), object : MovieClickListener {
+            override fun onMovieClicked(movie: Movie) {
+                Toast.makeText(this@MainActivity, movie.title, Toast.LENGTH_SHORT).show()
+            }
+        })*/
+
+        binding.recicler.adapter = moviesAdapter
+
+        binding.recicler.layoutManager = GridLayoutManager(this, 2)
+
+        lifecycleScope.launch {
+
+            val apiKey = getString(R.string.api_key)
+            val popularMovies = MovieDbClients.service.listPopularMovies(apiKey)
+
+            moviesAdapter.movies = popularMovies.results
+            moviesAdapter.notifyDataSetChanged()
+
+
+        }
 
         val message = findViewById<TextView>(R.id.message)
 
-        binding.recicler.adapter = MoviesAdapter(
-            listOf(
-                Movie("Title 1", "https://loremflickr.com/320/240?random=1"),
-                Movie("Title 2", "https://loremflickr.com/320/240?random=2"),
-                Movie("Title 3", "https://loremflickr.com/320/240?random=3"),
-                Movie("Title 4", "https://loremflickr.com/320/240?random=4"),
-                Movie("Title 5", "https://loremflickr.com/320/240?random=5"),
-            ),
-            object : MovieClickListener {
-                override fun onMovieClicked(movie: Movie) {
-                    Toast.makeText(this@MainActivity, movie.title, Toast.LENGTH_SHORT).show()
-                }
-            }
-        )
 
-       /* ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
-        }*/
+    }
+
+    private fun navigateTo(movie: Movie) {
+        val intent = Intent(this, DetailActivity::class.java)
+        intent.putExtra(DetailActivity.EXTRA_TITLE, movie.title)
+        startActivity(intent)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
     }
 }

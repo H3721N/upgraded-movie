@@ -1,21 +1,20 @@
 package com.gomez.herlin.my_application
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.gomez.herlin.my_application.databinding.ViewMovieItemBinding
+import com.gomez.herlin.my_application.model.Movie
 
 interface MovieClickListener {
     fun onMovieClicked(movie: Movie)
 }
 
-class MoviesAdapter(private val movies: List<Movie>, private val movieClickListener: MovieClickListener) : RecyclerView.Adapter<MoviesAdapter.ViewHolder>() {
+class MoviesAdapter(var movies: List<Movie>, private val movieClickListener: (Any) -> Unit) : RecyclerView.Adapter<MoviesAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding = ViewMovieItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        //val binding = LayoutInflater.from(parent.context).inflate(R.layout.view_movie_item, parent, false)
         return ViewHolder(binding)
     }
 
@@ -25,17 +24,16 @@ class MoviesAdapter(private val movies: List<Movie>, private val movieClickListe
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val movie = movies[position]
-        holder.itemView.setOnClickListener{
-            movieClickListener.onMovieClicked(movies[position])
-        }
+        holder.bind(movie, movieClickListener)
     }
 
     class ViewHolder(private val binding: ViewMovieItemBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(movie: Movie) {
+        fun bind(movie: Movie, listener: MovieClickListener) {
             binding.title.text = movie.title
             Glide.with(binding.root.context)
-                .load(movie.cover)
+                .load("https://image.tmdb.org/t/p/w185${movie.poster_path}")
                 .into(binding.cover)
+            itemView.setOnClickListener { listener.onMovieClicked(movie) }
         }
     }
 }

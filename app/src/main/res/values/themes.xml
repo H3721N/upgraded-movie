@@ -3,7 +3,14 @@
     <style name="Base.Theme.My_Application" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="colorPrimary">#FFFFFF</item>
+
+        <item name="android:textViewStyle">@style/textViewStyle</item>
     </style>
 
     <style name="Theme.My_Application" parent="Base.Theme.My_Application" />
+
+    <style name="textViewStyle" parent="Widget.MaterialComponents.TextView">
+        <item name='android:background'>?attr/colorPrimary</item>
+    </style>
 </resources>

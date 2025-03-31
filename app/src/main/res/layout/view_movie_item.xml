@@ -1,5 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
-
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -11,7 +9,7 @@
         android:id="@+id/cover"
         android:layout_width="match_parent"
         android:layout_height="200dp"
-        android:contentDescription="kkkkk"
+        android:contentDescription="Movie img"
         android:scaleType="centerCrop"
         tools:srcCompat="@drawable/ic_launcher_foreground" />
 
@@ -22,5 +20,7 @@
         android:padding="8dp"
         android:text="Title"
         android:textAlignment="center"
-        android:textSize="16sp" />
+        android:textSize="16sp"
+        android:textAppearance="?attr/textAppearanceHeadline6"
+    />
 </LinearLayout>
