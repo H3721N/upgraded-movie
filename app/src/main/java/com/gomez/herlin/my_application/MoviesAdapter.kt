@@ -11,8 +11,7 @@ interface MovieClickListener {
     fun onMovieClicked(movie: Movie)
 }
 
-class MoviesAdapter(var movies: List<Movie>, private val movieClickListener: (Any) -> Unit) : RecyclerView.Adapter<MoviesAdapter.ViewHolder>() {
-
+class MoviesAdapter(var movies: List<Movie>, private val movieClickListener: MovieClickListener) : RecyclerView.Adapter<MoviesAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding = ViewMovieItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ViewHolder(binding)

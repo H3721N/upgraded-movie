@@ -19,9 +19,11 @@ class MainActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(binding.root)
 
-        val moviesAdapter = MoviesAdapter(emptyList()) { movie ->
-            navigateTo(movie)
-        }
+        val moviesAdapter = MoviesAdapter(emptyList(), object : MovieClickListener {
+            override fun onMovieClicked(movie: Movie) {
+                navigateTo(movie)
+            }
+        })
 
         /*val moviesAdapter = MoviesAdapter(emptyList(), object : MovieClickListener {
             override fun onMovieClicked(movie: Movie) {
@@ -32,6 +34,9 @@ class MainActivity : AppCompatActivity() {
         binding.recicler.adapter = moviesAdapter
 
         binding.recicler.layoutManager = GridLayoutManager(this, 2)
+
+        val cover = findViewById<AspectRatioImageView>(R.id.cover)
+        cover.ratio = 1.5f
 
         lifecycleScope.launch {
 
@@ -51,7 +56,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun navigateTo(movie: Movie) {
         val intent = Intent(this, DetailActivity::class.java)
-        intent.putExtra(DetailActivity.EXTRA_TITLE, movie.title)
+        intent.putExtra(DetailActivity.EXTRA_MOVIE, movie)
         startActivity(intent)
     }
 
