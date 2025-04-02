@@ -6,4 +6,6 @@
     <string name="relase_date">Fecha de lanzamiento</string>
     <string name="popularity">Popularidad</string>
     <string name="vote_average">Votacion media</string>
+    <string name="best_movies">Mas poupulares</string>
+    <string name="popular_movies">Mas populares</string>
 </resources>

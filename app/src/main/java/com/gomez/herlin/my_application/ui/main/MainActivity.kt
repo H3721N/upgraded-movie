@@ -63,7 +63,7 @@ class MainActivity : AppCompatActivity() {
 
         requestPermissionLauncher.launch(Manifest.permission.ACCESS_COARSE_LOCATION)
 
-        val message = findViewById<TextView>(R.id.message)
+        //val message = findViewById<TextView>(R.id.message)
 
 
     }
