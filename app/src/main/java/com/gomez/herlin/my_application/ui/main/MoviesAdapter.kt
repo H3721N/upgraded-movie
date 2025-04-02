@@ -1,11 +1,13 @@
-package com.gomez.herlin.my_application
+package com.gomez.herlin.my_application.ui.main
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.gomez.herlin.my_application.databinding.ViewMovieItemBinding
 import com.gomez.herlin.my_application.model.Movie
+import com.gomez.herlin.my_application.ui.common.AspectRatioImageView
 
 interface MovieClickListener {
     fun onMovieClicked(movie: Movie)
@@ -31,7 +33,7 @@ class MoviesAdapter(var movies: List<Movie>, private val movieClickListener: Mov
             binding.title.text = movie.title
             Glide.with(binding.root.context)
                 .load("https://image.tmdb.org/t/p/w185${movie.poster_path}")
-                .into(binding.cover)
+                .into(binding.cover as ImageView)
             itemView.setOnClickListener { listener.onMovieClicked(movie) }
         }
     }
