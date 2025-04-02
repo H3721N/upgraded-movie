@@ -2,6 +2,7 @@ package com.gomez.herlin.my_application.ui.detail
 
 import android.os.Bundle
 import android.text.SpannableStringBuilder
+import android.view.MenuItem
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -28,13 +29,15 @@ class DetailActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_back_arrow)
 
+
+
         val movie = intent.getParcelableExtra<Movie>(EXTRA_MOVIE)
         if(movie != null) {
             title = movie.title
             Glide.with(this)
                 .load("https://image.tmdb.org/t/p/w780${movie.backdrop_path}")
                 .into(binding.backdrop)
-            binding.summary.text = movie.overview + movie.overview + movie.overview + movie.overview + movie.overview+ movie.overview + movie.overview + movie.overview + movie.overview
+            binding.summary.text = movie.overview
             bindDetailInfo(binding.detailInfo, movie)
         }
 
@@ -71,5 +74,13 @@ class DetailActivity : AppCompatActivity() {
             append(": ")
         }
         appendLine(value)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if(item.itemId == android.R.id.home) {
+            finish()
+            return true
+        }
+        return super.onOptionsItemSelected(item)
     }
 }
