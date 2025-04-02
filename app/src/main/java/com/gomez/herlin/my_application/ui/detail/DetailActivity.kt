@@ -1,15 +1,14 @@
-package com.gomez.herlin.my_application
+package com.gomez.herlin.my_application.ui.detail
 
 import android.os.Bundle
+import android.text.SpannableStringBuilder
 import android.widget.TextView
-import android.widget.Toolbar
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.text.bold
 import androidx.core.text.buildSpannedString
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import com.bumptech.glide.Glide
+import com.gomez.herlin.my_application.R
 import com.gomez.herlin.my_application.databinding.ActivityDetailBinding
 import com.gomez.herlin.my_application.model.Movie
 
@@ -35,7 +34,7 @@ class DetailActivity : AppCompatActivity() {
             Glide.with(this)
                 .load("https://image.tmdb.org/t/p/w780${movie.backdrop_path}")
                 .into(binding.backdrop)
-            binding.summary.text = movie.overview
+            binding.summary.text = movie.overview + movie.overview + movie.overview + movie.overview + movie.overview+ movie.overview + movie.overview + movie.overview + movie.overview
             bindDetailInfo(binding.detailInfo, movie)
         }
 
@@ -44,7 +43,12 @@ class DetailActivity : AppCompatActivity() {
 
     private fun bindDetailInfo(detailInfo: TextView, movie: Movie) {
         detailInfo.text = buildSpannedString {
-            bold { append("Original Lenguaje: ${movie.original_language}") }
+            appendInfo( R.string.original_languaje, movie.original_language)
+            appendInfo( R.string.original_title, movie.original_title)
+            appendInfo( R.string.relase_date, movie.release_date)
+            appendInfo( R.string.popularity, movie.popularity.toString())
+            appendInfo( R.string.vote_average, movie.vote_average.toString())
+            /*bold { append("Original Lenguaje: ${movie.original_language}") }
             appendLine(movie.original_language)
 
             bold { append("Original Title: ${movie.original_title}") }
@@ -57,7 +61,15 @@ class DetailActivity : AppCompatActivity() {
             appendLine(movie.popularity.toString())
 
             bold { append("Vote Average: ${movie.vote_average}") }
-            appendLine(movie.vote_average.toString())
+            appendLine(movie.vote_average.toString())*/
         }
+    }
+
+    private fun SpannableStringBuilder.appendInfo(stringRes: Int, value: String) {
+        bold {
+            append(getString(stringRes))
+            append(": ")
+        }
+        appendLine(value)
     }
 }
