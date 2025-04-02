@@ -14,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        tools:context=".MainActivity">
+        tools:context=".ui.main.MainActivity">
 
     <TextView
         android:id="@+id/message"
@@ -32,12 +32,14 @@
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         app:spanCount="3" />
 
-    <com.gomez.herlin.my_application.AspectRatioImageView
+    <com.gomez.herlin.my_application.ui.common.AspectRatioImageView
         android:id="@+id/cover"
         android:layout_width="wrap_content"
         android:layout_height="200dp"
         android:scaleType="center"
-        app:srcCompat="@drawable/mario" />
+        app:srcCompat="@drawable/mario"
+        app:ratio="1.5"
+        tools:ignore="MissingClass" />
 
 
 

@@ -6,7 +6,7 @@
     android:orientation="vertical"
     android:padding="20dp">
 
-    <com.gomez.herlin.my_application.AspectRatioImageView
+    <com.gomez.herlin.my_application.ui.common.AspectRatioImageView
         android:id="@+id/coverImg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

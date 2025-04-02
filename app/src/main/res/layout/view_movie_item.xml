@@ -6,12 +6,14 @@
     android:orientation="vertical"
     android:padding="2dp">
 
-    <com.gomez.herlin.my_application.AspectRatioImageView
+    <com.gomez.herlin.my_application.ui.common.AspectRatioImageView
         android:id="@+id/cover"
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:contentDescription="Movie img"
-        android:scaleType="centerCrop" />
+        android:scaleType="centerCrop"
+        app:ratio="1.5"
+        app:srcCompat="@drawable/mario" />
 
     <TextView
         android:id="@+id/title"
@@ -25,5 +27,5 @@
         android:textAppearance="?attr/textAppearanceHeadline6"
         android:textColorLink="@color/white"
         android:textSize="16sp"
-        android:textColor="@color/white"/>
+        android:textColor="@color/white" />
 </LinearLayout>
