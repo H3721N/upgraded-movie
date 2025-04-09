@@ -19,14 +19,19 @@ import com.gomez.herlin.my_application.R
 import com.gomez.herlin.my_application.databinding.ActivityMainBinding
 import com.gomez.herlin.my_application.model.Movie
 import com.gomez.herlin.my_application.model.MovieDbClients
+import com.gomez.herlin.my_application.model.TheMovieDbService
 import com.gomez.herlin.my_application.ui.detail.DetailActivity
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
+
+    @Inject
+    lateinit var movieDbService: TheMovieDbService
 
     private val moviesAdapter = MoviesAdapter(emptyList(), object : MovieClickListener {
         override fun onMovieClicked(movie: Movie) {
@@ -86,7 +91,7 @@ class MainActivity : AppCompatActivity() {
     private fun doRequestPopularMovies(region: String) {
         lifecycleScope.launch {
             val apiKey = getString(R.string.api_key)
-            val popularMovies = MovieDbClients.service.listPopularMovies(apiKey, region)
+            val popularMovies = movieDbService.listPopularMovies(apiKey, region)
 
             moviesAdapter.movies = popularMovies.results
             moviesAdapter.notifyDataSetChanged()

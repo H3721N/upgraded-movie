@@ -62,6 +62,9 @@ dependencies {
 
     implementation(libs.hilt.android)
     kapt(libs.hilt.compiler)
+
+    implementation(libs.dagger)
+    kapt(libs.dagger.compiler)
 }
 
 // Allow references to generated code

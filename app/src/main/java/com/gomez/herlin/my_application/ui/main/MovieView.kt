@@ -7,7 +7,9 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import com.gomez.herlin.my_application.R
 import com.gomez.herlin.my_application.model.Movie
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MovieView @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
 ) : LinearLayout(context, attrs, defStyleAttr) {
