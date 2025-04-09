@@ -12,7 +12,9 @@ import com.bumptech.glide.Glide
 import com.gomez.herlin.my_application.R
 import com.gomez.herlin.my_application.databinding.ActivityDetailBinding
 import com.gomez.herlin.my_application.model.Movie
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class DetailActivity : AppCompatActivity() {
 
     companion object {

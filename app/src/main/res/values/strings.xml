@@ -5,6 +5,7 @@
     <string name="relase_date">Relase date</string>
     <string name="popularity">Popularity</string>
     <string name="vote_average">Vote Average</string>
+    <string name="best_movies">Mas poupulares</string>
     <string name="popular_movies">Popular Movies</string>
 
 </resources>

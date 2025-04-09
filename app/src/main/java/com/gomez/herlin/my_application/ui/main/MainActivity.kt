@@ -22,9 +22,10 @@ import com.gomez.herlin.my_application.model.MovieDbClients
 import com.gomez.herlin.my_application.ui.detail.DetailActivity
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
-
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private val moviesAdapter = MoviesAdapter(emptyList(), object : MovieClickListener {
@@ -32,6 +33,7 @@ class MainActivity : AppCompatActivity() {
             navigateTo(movie)
         }
     })
+
 
     private lateinit var fusedLocationClient: FusedLocationProviderClient
 
